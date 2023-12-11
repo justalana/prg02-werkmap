@@ -10,7 +10,7 @@ $id = $_GET['id'];
 /** @var mysqli $db */
 require_once 'includes/database.php';
 
-$query = 'SELECT * FROM albums INNER JOIN artists WHERE id ='.$id;
+$query = 'SELECT * FROM albums INNER JOIN artists ON albums.artist_id = artists.artist_id WHERE id ='.$id;
 $result = mysqli_query($db, $query)
 or die('Error '.mysqli_error($db).' with query '.$query);
 
@@ -37,13 +37,13 @@ mysqli_close($db);
 <div class="container px-4">
     <div class="columns is-centered">
         <div class="column is-narrow">
-            <h2 class="title mt-4"><?= $album['name']?> details</h2>
+            <h2 class="title mt-4"><?= $album['album_name']?> details</h2>
             <section class="content">
                 <ul>
                     <li>Genre: <?= $album['genre']?></li>
                     <li>Year: <?= $album['year']?></li>
                     <li>Tracks: <?= $album['tracks']?></li>
-                    <li>Artist: <?= $album['artist']?></li>
+                    <li>Artist: <?= $album['name']?></li>
                 </ul>
             </section>
             <div>

@@ -4,7 +4,7 @@
 require_once 'includes/database.php';
 
 // Select all the albums from the database
-$query = "SELECT * FROM albums INNER JOIN artists";
+$query = "SELECT * FROM albums INNER JOIN artists ON albums.artist_id = artists.artist_id";
 $result = mysqli_query($db, $query)
 or die('Error '.mysqli_error($db).' with query '.$query);
 
@@ -55,8 +55,8 @@ mysqli_close($db);
                 <?php foreach ($albums as $index => $album) { ?>
                     <tr>
                         <td><?= $index + 1 ?></td>
-                        <td><?= $album['artist'] ?></td>
                         <td><?= $album['name'] ?></td>
+                        <td><?= $album['album_name'] ?></td>
                         <td><?= $album['genre'] ?></td>
                         <td><?= $album['year'] ?></td>
                         <td><?= $album['tracks'] ?></td>

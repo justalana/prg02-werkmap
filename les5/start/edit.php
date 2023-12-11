@@ -8,7 +8,7 @@ $id = $_GET['id'];
 /** @var mysqli $db */
 require_once 'includes/database.php';
 
-$query = 'SELECT * FROM albums WHERE id ='.$id;
+$query = 'SELECT * FROM albums INNER JOIN artists ON albums.artist_id = artists.artist_id WHERE id ='.$id;
 $result = mysqli_query($db, $query)
 or die('Error '.mysqli_error($db).' with query '.$query);
 
@@ -39,7 +39,7 @@ if(isset($_POST['submit'])) {
     } else {
 
 
-        $query = "UPDATE `albums` 
+        $query = "UPDATE albums 
                 SET `name`='$name',`artist`='$artist',`genre`='$genre',`year`=$year,`tracks`=$tracks   
                 WHERE id =" .$id;
         echo $query;
@@ -77,7 +77,7 @@ mysqli_close($db);
                     <div class="field-body">
                         <div class="field">
                             <div class="control">
-                                <input class="input" id="name" type="text" name="name" value="<?= $album['name']?>"/>
+                                <input class="input" id="name" type="text" name="name" value="<?= $album['album_name']?>"/>
                             </div>
                             <?php if(isset($nameError)) { ?>
                                 <p class="help is-danger">
@@ -95,7 +95,7 @@ mysqli_close($db);
                     <div class="field-body">
                         <div class="field">
                             <div class="control">
-                                <input class="input" id="artist" type="text" name="artist" value="<?= $album['artist']?>"/>
+                                <input class="input" id="artist" type="text" name="artist" value="<?= $album['name']?>"/>
                             </div>
                             <?php if(isset($artistError)) { ?>
                                 <p class="help is-danger">
