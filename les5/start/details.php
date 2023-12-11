@@ -10,7 +10,7 @@ $id = $_GET['id'];
 /** @var mysqli $db */
 require_once 'includes/database.php';
 
-$query = 'SELECT * FROM albums WHERE id ='.$id;
+$query = 'SELECT * FROM albums INNER JOIN artists WHERE id ='.$id;
 $result = mysqli_query($db, $query)
 or die('Error '.mysqli_error($db).' with query '.$query);
 

@@ -4,7 +4,7 @@
 require_once 'includes/database.php';
 
 // Select all the albums from the database
-$query = "SELECT * FROM albums";
+$query = "SELECT * FROM albums INNER JOIN artists";
 $result = mysqli_query($db, $query)
 or die('Error '.mysqli_error($db).' with query '.$query);
 
